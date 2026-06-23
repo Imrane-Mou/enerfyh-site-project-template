@@ -1,0 +1,185 @@
+[
+  {
+    "slug": "avesnes-le-comte",
+    "visible": true,
+    "status": "Permis de construire accordé",
+    "commune": "Avesnes-le-Comte",
+    "department": "Pas-de-Calais (62810)",
+    "region": "Hauts-de-France",
+    "capacity": "36 MW / 128 MWh",
+    "thumbnail": "",
+    "project": {
+      "name": "Centrale de stockage d'énergie par batteries d'Avesnes-le-Comte",
+      "subtitle": "36 MW / 128 MWh de capacité de stockage pour la Communauté de Communes des Campagnes de l'Artois",
+      "description": "EnerFYH développe sur la commune d'Avesnes-le-Comte une centrale de stockage d'énergie par batteries (BESS — Battery Energy Storage System), située au 950 rue de Frévent, en zone UE du PLUi Campagnes de l'Artois (approuvé en mars 2022)."
+    },
+    "keyFigures": [
+      {
+        "label": "PUISSANCE INSTALLÉE",
+        "value": "36 MW",
+        "detail": "Puissance maximale injectée ou soutirée du réseau"
+      },
+      {
+        "label": "CAPACITÉ DE STOCKAGE",
+        "value": "128 MWh",
+        "detail": "Capacité de stockage totale de la centrale"
+      },
+      {
+        "label": "SURFACE D'IMPLANTATION",
+        "value": "6 000 m²",
+        "detail": "Emprise au sol du projet"
+      },
+      {
+        "label": "DURÉE DE VIE",
+        "value": "20 ans",
+        "detail": "Durée de vie prévisionnelle de l'installation"
+      },
+      {
+        "label": "RACCORDEMENT",
+        "value": "Réseau RTE",
+        "detail": "Raccordement au réseau électrique national"
+      },
+      {
+        "label": "ZONAGE",
+        "value": "Zone UE",
+        "detail": "PLUi Campagnes de l'Artois, approuvé mars 2022"
+      }
+    ],
+    "timeline": [
+      {
+        "date": "2022",
+        "event": "Approbation du PLUi Campagnes de l'Artois incluant la zone UE du projet"
+      },
+      {
+        "date": "2023",
+        "event": "Études techniques et environnementales préliminaires"
+      },
+      {
+        "date": "2024",
+        "event": "Dépôt de la demande de permis de construire"
+      },
+      {
+        "date": "2025",
+        "event": "Obtention du permis de construire"
+      },
+      {
+        "date": "À venir",
+        "event": "Travaux de construction et raccordement au réseau RTE"
+      }
+    ],
+    "location": {
+      "address": "950 rue de Frévent, 62810 Avesnes-le-Comte",
+      "commune": "Avesnes-le-Comte",
+      "department": "Pas-de-Calais",
+      "gpsLat": 50.3011,
+      "gpsLng": 2.4853,
+      "gpsLabel": "50°18'N 2°29'E",
+      "raccordement": "Raccordement au réseau électrique national (RTE)",
+      "distanceHabitations": "Site implanté en zone d'activité économique, à distance des habitations"
+    },
+    "localBenefits": {
+      "taxe1": {
+        "label": "Taxe Foncière sur les Propriétés Bâties (TFPB)",
+        "amount": "Recettes stables",
+        "detail": "Versée à la commune pendant toute la durée d'exploitation."
+      },
+      "taxe2": {
+        "label": "Cotisation Foncière des Entreprises (CFE)",
+        "amount": "Recettes stables",
+        "detail": "Bénéficie à l'intercommunalité durant toute l'exploitation."
+      },
+      "taxe3": {
+        "label": "Taxe d'aménagement",
+        "amount": "Versement unique",
+        "detail": "Versée à la construction du projet."
+      },
+      "emplois": "Mobilisation d'entreprises et de main-d'œuvre locales pour la construction",
+      "agricultureImpact": "Aucune consommation de terres agricoles ou naturelles — implantation en zone d'activité économique",
+      "agricultureCompensation": "Le site n'impacte pas l'activité agricole du territoire."
+    },
+    "environment": [
+      {
+        "title": "Faible impact environnemental",
+        "icon": "leaf",
+        "content": "Faible nuisance sonore, faibles émissions, faible hauteur du bâti. Le site est implanté en zone d'activité économique sans consommer de terres agricoles ou naturelles."
+      },
+      {
+        "title": "Site clôturé et surveillé",
+        "icon": "shield",
+        "content": "Le site est entièrement clôturé et surveillé 24h/24, garantissant la sécurité du voisinage et des installations."
+      },
+      {
+        "title": "Clôtures végétalisées",
+        "icon": "leaf",
+        "content": "Des acteurs locaux pourront être sollicités pour l'entretien courant du site, notamment la gestion des clôtures végétalisées."
+      }
+    ],
+    "safety": [
+      {
+        "title": "Réseau plus résilient",
+        "content": "En absorbant les surplus et en restituant l'énergie lors des pics de consommation, la centrale contribue directement à la stabilité et à la sécurité du réseau électrique national."
+      },
+      {
+        "title": "Moins de risques de coupures",
+        "content": "Les réseaux ruraux sont plus exposés aux tensions de charge. Cette centrale agit comme un amortisseur qui sécurise l'approvisionnement électrique des foyers et des entreprises du territoire."
+      },
+      {
+        "title": "Surveillance continue",
+        "content": "Site entièrement clôturé et surveillé 24h/24 pour garantir la sécurité des installations et du voisinage."
+      },
+      {
+        "title": "Conformité réglementaire",
+        "content": "Le projet respecte l'ensemble des normes applicables aux installations de stockage par batteries."
+      }
+    ],
+    "mythsFacts": [
+      {
+        "category": "Environnement",
+        "myth": "Ce projet va consommer des terres agricoles.",
+        "fact": "Le site est implanté en zone d'activité économique (zone UE du PLUi) et ne consomme aucune terre agricole ou naturelle."
+      },
+      {
+        "category": "Sécurité",
+        "myth": "Le site n'est pas surveillé.",
+        "fact": "Le site est entièrement clôturé et surveillé 24h/24, garantissant la sécurité des installations et du voisinage."
+      },
+      {
+        "category": "Énergie",
+        "myth": "Le stockage par batteries ne sert à rien pour le réseau.",
+        "fact": "Le stockage est un maillon indispensable du système électrique de demain : il permet à l'ensemble des sources de production de fonctionner de façon plus efficace, en absorbant les surplus et en les restituant lors des pics de consommation."
+      }
+    ],
+    "faq": [
+      {
+        "category": "Contexte projet",
+        "question": "Où sera implantée la centrale ?",
+        "answer": "La centrale sera implantée au 950 rue de Frévent à Avesnes-le-Comte, en zone UE du PLUi Campagnes de l'Artois, approuvé en mars 2022."
+      },
+      {
+        "category": "Contexte projet",
+        "question": "Quel est l'état d'avancement du projet ?",
+        "answer": "Le permis de construire a été accordé. Le projet est en cours de développement vers la phase de construction."
+      },
+      {
+        "category": "Cadre de vie",
+        "question": "Le projet va-t-il impacter les terres agricoles ?",
+        "answer": "Non, le site est implanté en zone d'activité économique et ne consomme aucune terre agricole ou naturelle."
+      },
+      {
+        "category": "Économie locale",
+        "question": "Quelles retombées pour la commune ?",
+        "answer": "Le projet génère des recettes fiscales stables pour la commune et l'intercommunalité (TFPB, CFE, taxe d'aménagement), ainsi qu'une mobilisation d'entreprises locales pendant la construction."
+      }
+    ],
+    "news": [],
+    "documents": [
+      {
+        "label": "Flyer d'information du projet",
+        "url": "#"
+      }
+    ],
+    "heroImage": "/images/avesnes-le-comte.jpg",
+    "galleryPhotos": [],
+    "sitePlan": ""
+  }
+]
