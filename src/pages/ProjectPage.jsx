@@ -475,7 +475,7 @@ export default function ProjectPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 12, padding: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14 }}>Contact</div>
-                <a href="mailto:contact@enerfyh.com" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.92rem' }}><Icon name="mail" size={18} strokeWidth={1.5} /> contact@enerfyh.com</a>
+                <a href="mailto:youssef.mabrouk@enerfyh.com" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.92rem' }}><Icon name="mail" size={18} strokeWidth={1.5} /> youssef.mabrouk@enerfyh.com</a>
               </div>
               <div style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 12, padding: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 14 }}>Documents</div>
