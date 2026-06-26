@@ -181,5 +181,61 @@
     "heroImage": "/images/avesnes-le-comte.jpg",
     "galleryPhotos": [],
     "sitePlan": ""
+  },
+  {
+    "slug": "please-select",
+    "visible": true,
+    "status": "En instruction",
+    "commune": "Please Select",
+    "department": "",
+    "region": "",
+    "capacity": "",
+    "thumbnail": "",
+    "heroImage": "",
+    "sitePlan": "",
+    "galleryPhotos": [],
+    "project": {
+      "name": "Imrane Moumad",
+      "subtitle": "",
+      "description": ""
+    },
+    "keyFigures": [],
+    "timeline": [],
+    "location": {
+      "address": "10 rue de la Hotoie",
+      "commune": "Please Select",
+      "department": "",
+      "gpsLat": 0,
+      "gpsLng": 0,
+      "gpsLabel": "",
+      "raccordement": "",
+      "distanceHabitations": ""
+    },
+    "localBenefits": {
+      "taxe1": {
+        "label": "Taxe Foncière (TFPB)",
+        "amount": "",
+        "detail": ""
+      },
+      "taxe2": {
+        "label": "Cotisation Foncière (CFE)",
+        "amount": "",
+        "detail": ""
+      },
+      "taxe3": {
+        "label": "Taxe d'aménagement",
+        "amount": "",
+        "detail": ""
+      },
+      "emplois": "",
+      "agricultureImpact": "",
+      "agricultureCompensation": ""
+    },
+    "environment": [],
+    "safety": [],
+    "mythsFacts": [],
+    "faq": [],
+    "news": [],
+    "documents": []
   }
 ]
