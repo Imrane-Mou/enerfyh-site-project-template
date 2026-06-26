@@ -77,16 +77,79 @@ function projectToForm(p) {
 }
 
 export default function AdminPage() {
+  // ── Authentification ──
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [sessionPassword, setSessionPassword] = useState(''); // gardé en mémoire pour les appels API suivants
+  const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+
   const [form, setForm] = useState(BLANK_FORM);
   const [selectedSlug, setSelectedSlug] = useState('');
   const [mode, setMode] = useState('new'); // 'new' | 'edit'
   const [output, setOutput] = useState('');
   const [outputMode, setOutputMode] = useState('save'); // 'save' | 'delete'
   const [copied, setCopied] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishResult, setPublishResult] = useState(null); // { success, message, commitUrl } | { error }
   const outputRef = useRef(null);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setAuthError('');
+    setAuthLoading(true);
+    try {
+      const res = await fetch('/api/verify-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: passwordInput }),
+      });
+      const data = await res.json();
+      if (data.valid) {
+        setSessionPassword(passwordInput);
+        setAuthenticated(true);
+      } else {
+        setAuthError('Mot de passe incorrect.');
+      }
+    } catch (err) {
+      setAuthError('Erreur de connexion au serveur.');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  // Publie directement sur GitHub via le backend (au lieu de juste copier-coller)
+  const publishToGitHub = async (action, projectData, slugForAction) => {
+    setPublishing(true);
+    setPublishResult(null);
+    try {
+      const res = await fetch('/api/save-project', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          password: sessionPassword,
+          action,                 // 'create' | 'update' | 'delete'
+          project: projectData,   // objet projet complet (sauf pour delete)
+          slug: slugForAction,    // slug ciblé (pour update/delete)
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPublishResult({ success: true, message: data.message, commitUrl: data.commitUrl });
+      } else {
+        setPublishResult({ success: false, error: data.error, details: data.details });
+      }
+    } catch (err) {
+      setPublishResult({ success: false, error: 'Erreur réseau', details: err.message });
+    } finally {
+      setPublishing(false);
+      setTimeout(() => outputRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+  };
 
   const loadProject = (slug) => {
     setSelectedSlug(slug);
+    setPublishResult(null);
     if (!slug) {
       setForm(BLANK_FORM);
       setMode('new');
@@ -109,11 +172,9 @@ export default function AdminPage() {
   };
 
   const deleteProject = () => {
-    const ok = window.confirm(`Supprimer le projet "${form.commune || selectedSlug}" ? Cette action génère les instructions de suppression — rien n'est supprimé automatiquement.`);
+    const ok = window.confirm(`Supprimer définitivement le projet "${form.commune || selectedSlug}" du site ? Cette action publie immédiatement le changement.`);
     if (!ok) return;
-    setOutputMode('delete');
-    setOutput(selectedSlug);
-    setTimeout(() => outputRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+    publishToGitHub('delete', null, selectedSlug);
   };
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
@@ -125,46 +186,46 @@ export default function AdminPage() {
   const addListItem = (key, blank) => setForm(f => ({ ...f, [key]: [...f[key], blank()] }));
   const removeListItem = (key, i) => setForm(f => ({ ...f, [key]: f[key].filter((_, idx) => idx !== i) }));
 
-  const generate = () => {
-    const obj = {
-      slug: form.slug || slugify(form.commune || 'projet'),
-      visible: form.visible,
-      status: form.status,
-      commune: form.commune,
-      department: form.department,
-      region: form.region,
-      capacity: form.capacity,
-      thumbnail: form.thumbnail,
-      heroImage: form.heroImage,
-      sitePlan: form.sitePlan,
-      galleryPhotos: form.galleryPhotos.filter(Boolean),
-      project: { name: form.projectName, subtitle: form.subtitle, description: form.description },
-      keyFigures: form.keyFigures.filter(x => x.label || x.value),
-      timeline: form.timeline.filter(x => x.date || x.event),
-      location: {
-        address: form.address, commune: form.commune, department: form.department,
-        gpsLat: parseFloat(form.gpsLat) || 0, gpsLng: parseFloat(form.gpsLng) || 0,
-        gpsLabel: form.gpsLabel, raccordement: form.raccordement, distanceHabitations: form.distanceHabitations,
-      },
-      localBenefits: {
-        taxe1: form.taxe1, taxe2: form.taxe2, taxe3: form.taxe3,
-        emplois: form.emplois, agricultureImpact: form.agricultureImpact, agricultureCompensation: form.agricultureCompensation,
-      },
-      environment: form.environment.filter(x => x.title),
-      safety: form.safety.filter(x => x.title),
-      mythsFacts: form.mythsFacts.filter(x => x.myth),
-      faq: form.faq.filter(x => x.question),
-      news: form.news.filter(x => x.title),
-      documents: form.documents.filter(x => x.label),
-    };
-    setOutputMode('save');
-    setOutput(JSON.stringify(obj, null, 2));
-    setCopied(false);
-    setTimeout(() => outputRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
-  };
+  const buildProjectObject = () => ({
+    slug: form.slug || slugify(form.commune || 'projet'),
+    visible: form.visible,
+    status: form.status,
+    commune: form.commune,
+    department: form.department,
+    region: form.region,
+    capacity: form.capacity,
+    thumbnail: form.thumbnail,
+    heroImage: form.heroImage,
+    sitePlan: form.sitePlan,
+    galleryPhotos: form.galleryPhotos.filter(Boolean),
+    project: { name: form.projectName, subtitle: form.subtitle, description: form.description },
+    keyFigures: form.keyFigures.filter(x => x.label || x.value),
+    timeline: form.timeline.filter(x => x.date || x.event),
+    location: {
+      address: form.address, commune: form.commune, department: form.department,
+      gpsLat: parseFloat(form.gpsLat) || 0, gpsLng: parseFloat(form.gpsLng) || 0,
+      gpsLabel: form.gpsLabel, raccordement: form.raccordement, distanceHabitations: form.distanceHabitations,
+    },
+    localBenefits: {
+      taxe1: form.taxe1, taxe2: form.taxe2, taxe3: form.taxe3,
+      emplois: form.emplois, agricultureImpact: form.agricultureImpact, agricultureCompensation: form.agricultureCompensation,
+    },
+    environment: form.environment.filter(x => x.title),
+    safety: form.safety.filter(x => x.title),
+    mythsFacts: form.mythsFacts.filter(x => x.myth),
+    faq: form.faq.filter(x => x.question),
+    news: form.news.filter(x => x.title),
+    documents: form.documents.filter(x => x.label),
+  });
 
-  const copyOutput = () => {
-    navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2500); });
+  // Publie directement (création ou mise à jour selon le mode actuel)
+  const handlePublish = () => {
+    const obj = buildProjectObject();
+    if (mode === 'edit') {
+      publishToGitHub('update', obj, selectedSlug);
+    } else {
+      publishToGitHub('create', obj, obj.slug);
+    }
   };
 
   const sectionCard = { background: 'white', borderRadius: 14, padding: '28px 28px 20px', border: '1px solid rgba(13,31,74,0.1)', boxShadow: '0 2px 12px rgba(13,31,74,0.05)', marginBottom: 24 };
@@ -174,6 +235,45 @@ export default function AdminPage() {
   const removeBtn = { background: 'none', border: 'none', color: '#C0392B', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600, padding: '4px 8px', display: 'inline-flex', alignItems: 'center', gap: 4 };
   const itemBox = { background: '#F8F6F3', borderRadius: 10, padding: '18px', marginBottom: 14, border: '1px solid rgba(13,31,74,0.06)' };
   const row3 = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12 };
+
+  // ── Écran de connexion : affiché tant que le mot de passe n'est pas validé ──
+  if (!authenticated) {
+    return (
+      <div style={{ background: '#0D1F4A', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+        <div style={{ width: '100%', maxWidth: 380 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
+            <div style={{ background: 'white', borderRadius: 6, padding: '6px 14px' }}>
+              <div style={{ color: '#0D1F4A', fontWeight: 800, fontSize: '1rem', lineHeight: 1.1 }}>EnerFYH.</div>
+              <div style={{ color: '#0D1F4A', fontSize: '0.48rem', opacity: 0.55, letterSpacing: '0.06em' }}>∧ kyntus group</div>
+            </div>
+          </div>
+          <form onSubmit={handleLogin} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '32px' }}>
+            <div style={{ color: 'white', fontWeight: 700, fontSize: '1.05rem', marginBottom: 6, textAlign: 'center' }}>Accès administrateur</div>
+            <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.82rem', marginBottom: 24, textAlign: 'center' }}>Entrez le mot de passe pour gérer les projets</div>
+            <input
+              type="password"
+              value={passwordInput}
+              onChange={e => setPasswordInput(e.target.value)}
+              placeholder="Mot de passe"
+              autoFocus
+              style={{ width: '100%', padding: '13px 16px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 8, color: 'white', fontSize: '0.95rem', outline: 'none', marginBottom: 16 }}
+              onFocus={e => e.target.style.borderColor = 'rgba(255,255,255,0.5)'}
+              onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.15)'}
+            />
+            {authError && (
+              <div style={{ color: '#FF8A75', fontSize: '0.82rem', marginBottom: 16, textAlign: 'center' }}>{authError}</div>
+            )}
+            <button type="submit" disabled={authLoading} style={{ width: '100%', background: 'white', color: '#0D1F4A', border: 'none', borderRadius: 8, padding: '13px', fontSize: '0.92rem', fontWeight: 700, cursor: authLoading ? 'not-allowed' : 'pointer', opacity: authLoading ? 0.6 : 1 }}>
+              {authLoading ? 'Vérification...' : 'Se connecter'}
+            </button>
+          </form>
+          <div style={{ textAlign: 'center', marginTop: 20 }}>
+            <Link to="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.82rem' }}>← Retour au site</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ background: '#F5F2EA', minHeight: '100vh' }}>
@@ -197,7 +297,7 @@ export default function AdminPage() {
       <div style={{ maxWidth: 880, margin: '0 auto', padding: '32px 24px 80px' }}>
         {/* Intro */}
         <div style={{ background: 'rgba(13,31,74,0.06)', border: '1px solid rgba(13,31,74,0.12)', borderRadius: 12, padding: '18px 22px', marginBottom: 32, fontSize: '0.88rem', color: '#3A4A6A', lineHeight: 1.6 }}>
-          <strong style={{ color: '#0D1F4A' }}>Comment ça marche :</strong> remplissez les champs ci-dessous, cliquez sur <em>Générer le JSON</em> en bas, copiez le résultat, puis collez-le dans le fichier <code style={{ background: 'rgba(13,31,74,0.1)', padding: '1px 6px', borderRadius: 4 }}>src/data/projects.json</code> (entre les crochets, séparé par une virgule des autres projets).
+          <strong style={{ color: '#0D1F4A' }}>Comment ça marche :</strong> remplissez les champs ci-dessous, puis cliquez sur <em>Publier</em> en bas — le site est mis à jour automatiquement en 1-2 minutes, aucune autre action n'est nécessaire.
         </div>
 
         {/* ── PROJECT SELECTOR ── */}
@@ -222,8 +322,8 @@ export default function AdminPage() {
                 <button onClick={startNewProject} style={{ background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, padding: '11px 18px', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
                   + Nouveau projet
                 </button>
-                <button onClick={deleteProject} style={{ background: 'rgba(220,60,50,0.15)', color: '#FF8A75', border: '1px solid rgba(220,60,50,0.4)', borderRadius: 8, padding: '11px 18px', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-                  Supprimer ce projet
+                <button onClick={deleteProject} disabled={publishing} style={{ background: 'rgba(220,60,50,0.15)', color: '#FF8A75', border: '1px solid rgba(220,60,50,0.4)', borderRadius: 8, padding: '11px 18px', fontSize: '0.82rem', fontWeight: 600, cursor: publishing ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap', opacity: publishing ? 0.5 : 1 }}>
+                  {publishing ? 'Suppression...' : 'Supprimer ce projet'}
                 </button>
               </>
             )}
@@ -495,51 +595,53 @@ export default function AdminPage() {
           <button onClick={() => addListItem('documents', blankDoc)} style={addBtn}>+ Ajouter un document</button>
         </div>
 
-        {/* ── GENERATE ── */}
-        <button onClick={generate} style={{ width: '100%', background: '#0D1F4A', color: 'white', border: 'none', borderRadius: 10, padding: '18px', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', marginTop: 8, marginBottom: 24, transition: 'background 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.background = '#1A3A7A'}
-          onMouseLeave={e => e.currentTarget.style.background = '#0D1F4A'}>
-          {mode === 'edit' ? 'Générer le JSON mis à jour →' : 'Générer le JSON →'}
+        {/* ── PUBLISH ── */}
+        <button onClick={handlePublish} disabled={publishing} style={{
+          width: '100%', background: publishing ? '#5A6B8C' : '#0D1F4A', color: 'white', border: 'none',
+          borderRadius: 10, padding: '18px', fontSize: '1rem', fontWeight: 700,
+          cursor: publishing ? 'not-allowed' : 'pointer', marginTop: 8, marginBottom: 24, transition: 'background 0.2s',
+        }}
+          onMouseEnter={e => { if (!publishing) e.currentTarget.style.background = '#1A3A7A'; }}
+          onMouseLeave={e => { if (!publishing) e.currentTarget.style.background = '#0D1F4A'; }}>
+          {publishing
+            ? 'Publication en cours...'
+            : mode === 'edit' ? 'Publier les modifications →' : 'Publier ce nouveau projet →'}
         </button>
 
-        {/* ── OUTPUT : SAVE/UPDATE ── */}
-        {output && outputMode === 'save' && (
-          <div ref={outputRef} style={{ background: '#0A1733', borderRadius: 14, padding: '24px', position: 'relative' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', fontWeight: 600 }}>JSON généré</span>
-              <button onClick={copyOutput} style={{ background: copied ? '#16A34A' : 'white', color: copied ? 'white' : '#0D1F4A', border: 'none', borderRadius: 8, padding: '9px 18px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, transition: 'background 0.2s' }}>
-                {copied ? <><Icon name="check" size={14} strokeWidth={2.5} /> Copié !</> : 'Copier'}
-              </button>
-            </div>
-            <pre style={{ color: '#A8C5E0', fontSize: '0.78rem', lineHeight: 1.6, overflow: 'auto', maxHeight: 400, margin: 0, fontFamily: 'monospace', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{output}</pre>
-            <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.1)', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
-              {mode === 'edit' ? (
-                <><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Étapes (modification) :</strong> 1. Copiez ce JSON · 2. Ouvrez <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>src/data/projects.json</code> sur GitHub · 3. Repérez le bloc qui commence par <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>"slug": "{selectedSlug}"</code> et remplacez-le entièrement par ce JSON · 4. Commit — le site se met à jour automatiquement.</>
-              ) : (
-                <><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Étapes (nouveau projet) :</strong> 1. Copiez ce JSON · 2. Ouvrez <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>src/data/projects.json</code> sur GitHub · 3. Collez-le dans la liste (entre crochets, séparé par une virgule des autres projets) · 4. Commit — le site se met à jour automatiquement.</>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* ── OUTPUT : DELETE ── */}
-        {output && outputMode === 'delete' && (
-          <div ref={outputRef} style={{ background: '#0A1733', borderRadius: 14, padding: '24px', border: '1px solid rgba(220,60,50,0.3)' }}>
-            <div style={{ color: '#FF8A75', fontSize: '0.85rem', fontWeight: 700, marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Icon name="x" size={16} strokeWidth={2.5} /> Suppression du projet "{output}"
-            </div>
-            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.7, marginBottom: 16 }}>
-              Pour des raisons de sécurité, l'admin ne supprime jamais un projet automatiquement. Voici comment le faire en toute sécurité sur GitHub :
-            </p>
-            <ol style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', lineHeight: 1.9, paddingLeft: 20 }}>
-              <li>Ouvrez <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>src/data/projects.json</code> sur GitHub</li>
-              <li>Recherchez (Ctrl+F) le bloc contenant <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>"slug": "{output}"</code></li>
-              <li>Supprimez l'intégralité de ce bloc, des accolades <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>{'{'}</code> à <code style={{ background: 'rgba(255,255,255,0.1)', padding: '1px 5px', borderRadius: 3 }}>{'}'}</code>, y compris la virgule qui suit (ou précède s'il s'agit du dernier élément)</li>
-              <li>Commit — le projet disparaît du site automatiquement</li>
-            </ol>
-            <div style={{ marginTop: 18, background: 'rgba(126,204,82,0.08)', border: '1px solid rgba(126,204,82,0.25)', borderRadius: 8, padding: '12px 16px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>
-              Astuce plus simple : si vous voulez juste cacher le projet sans le supprimer définitivement, chargez-le ci-dessus et passez "Visible" sur "Non" à la place — c'est réversible.
-            </div>
+        {/* ── RESULT ── */}
+        {publishResult && (
+          <div ref={outputRef} style={{
+            background: '#0A1733', borderRadius: 14, padding: '24px',
+            border: `1px solid ${publishResult.success ? 'rgba(126,204,82,0.3)' : 'rgba(220,60,50,0.3)'}`,
+          }}>
+            {publishResult.success ? (
+              <>
+                <div style={{ color: '#7ECC52', fontSize: '0.9rem', fontWeight: 700, marginBottom: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Icon name="check" size={16} strokeWidth={2.5} /> Publié avec succès
+                </div>
+                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', lineHeight: 1.7, marginBottom: 12 }}>
+                  {publishResult.message}
+                </p>
+                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', lineHeight: 1.7 }}>
+                  Vercel va redéployer automatiquement le site (1-2 minutes). Le changement sera ensuite visible en ligne.
+                </p>
+                {publishResult.commitUrl && (
+                  <a href={publishResult.commitUrl} target="_blank" rel="noreferrer" style={{ color: '#7ECC52', fontSize: '0.82rem', display: 'inline-block', marginTop: 10 }}>
+                    Voir le commit sur GitHub →
+                  </a>
+                )}
+              </>
+            ) : (
+              <>
+                <div style={{ color: '#FF8A75', fontSize: '0.9rem', fontWeight: 700, marginBottom: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Icon name="x" size={16} strokeWidth={2.5} /> Échec de la publication
+                </div>
+                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', lineHeight: 1.7 }}>{publishResult.error}</p>
+                {publishResult.details && (
+                  <pre style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.72rem', marginTop: 10, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{publishResult.details}</pre>
+                )}
+              </>
+            )}
           </div>
         )}
       </div>
