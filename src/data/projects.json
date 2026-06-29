@@ -79,8 +79,8 @@
         "detail": "Versée à la commune pendant toute la durée d'exploitation."
       },
       "taxe2": {
-        "label": "Recettes stables",
-        "amount": "",
+        "label": "Cotisation Foncière des Entreprises (CFE)",
+        "amount": "Recettes stables",
         "detail": "Bénéficie à l'intercommunalité durant toute l'exploitation."
       },
       "taxe3": {

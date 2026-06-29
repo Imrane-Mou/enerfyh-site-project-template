@@ -153,7 +153,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow">Localisation</span>
           <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Localisation du site</h2>
-          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 560 }}>Découvrez l'emplacement précis du projet et les critères qui ont guidé ce choix.</p>
+          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 700 }}>Découvrez l'emplacement précis du projet et les critères qui ont guidé ce choix.</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }}>
             <div ref={mapRef} style={{ height: 380, borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(13,31,74,0.12)', boxShadow: '0 4px 24px rgba(13,31,74,0.08)' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -182,7 +182,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow">Retombées locales</span>
           <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Bénéfices pour le territoire</h2>
-          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 560 }}>Ce projet apporte des ressources concrètes à la commune et à ses habitants.</p>
+          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 700 }}>Ce projet apporte des ressources concrètes à la commune et à ses habitants.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 18, marginBottom: 40 }}>
             {[p.localBenefits.taxe1, p.localBenefits.taxe2, p.localBenefits.taxe3].map((tax, i) => (
               <div key={i} style={{ background: 'white', borderRadius: 12, padding: '28px 24px', border: '1px solid rgba(13,31,74,0.08)', borderTop: `4px solid #0D1F4A`, boxShadow: '0 2px 12px rgba(13,31,74,0.05)' }}>
@@ -237,7 +237,7 @@ export default function ProjectPage() {
           <div className="container">
             <span className="eyebrow">Plan du projet</span>
             <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Implantation sur le site</h2>
-            <p style={{ color: '#3A4A6A', marginBottom: 40, maxWidth: 560 }}>Vue d'ensemble du plan de masse du projet.</p>
+            <p style={{ color: '#3A4A6A', marginBottom: 40, maxWidth: 700 }}>Vue d'ensemble du plan de masse du projet.</p>
             <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(13,31,74,0.1)', boxShadow: '0 4px 24px rgba(13,31,74,0.08)' }}>
               <img src={p.sitePlan} alt="Plan du projet" style={{ width: '100%', display: 'block' }} />
             </div>
@@ -251,7 +251,7 @@ export default function ProjectPage() {
           <div className="container">
             <span className="eyebrow">Photos</span>
             <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Photos du site</h2>
-            <p style={{ color: '#3A4A6A', marginBottom: 40, maxWidth: 560 }}>Aperçu visuel du site et de son environnement.</p>
+            <p style={{ color: '#3A4A6A', marginBottom: 40, maxWidth: 700 }}>Aperçu visuel du site et de son environnement.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
               {p.galleryPhotos.map((src, i) => (
                 <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(13,31,74,0.08)', aspectRatio: '4/3', boxShadow: '0 2px 12px rgba(13,31,74,0.06)' }}>
@@ -268,7 +268,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow" style={{ color: 'rgba(255,255,255,0.45)' }}>Sécurité</span>
           <h2 style={{ color: 'white', marginBottom: 12 }}>Sécurité maximale</h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: 48, maxWidth: 560 }}>La sécurité est notre priorité absolue. Le projet applique rigoureusement la réglementation ICPE.</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: 48, maxWidth: 700 }}>La sécurité est notre priorité absolue. Le projet applique rigoureusement la réglementation ICPE.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))', gap: 18 }}>
             {p.safety.map((item, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.07)', borderRadius: 12, padding: '28px 24px', border: '1px solid rgba(255,255,255,0.1)', transition: 'background 0.2s' }}
@@ -291,7 +291,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow">Le vrai du faux</span>
           <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Idées reçues & réponses</h2>
-          <p style={{ color: '#3A4A6A', marginBottom: 32, maxWidth: 560 }}>Retrouvez les réponses aux principales interrogations concernant le projet.</p>
+          <p style={{ color: '#3A4A6A', marginBottom: 32, maxWidth: 700 }}>Retrouvez les réponses aux principales interrogations concernant le projet.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 28 }}>
             {mythCategories.map(cat => (
               <button key={cat} onClick={() => setMythCat(cat)} style={{ ...chip(), background: mythCat === cat ? '#0D1F4A' : 'white', color: mythCat === cat ? 'white' : '#3A4A6A', border: `1.5px solid ${mythCat === cat ? '#0D1F4A' : 'rgba(13,31,74,0.15)'}` }}>
@@ -334,7 +334,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow">FAQ</span>
           <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Vos questions, nos réponses</h2>
-          <p style={{ color: '#3A4A6A', marginBottom: 32, maxWidth: 560 }}>Retrouvez les réponses aux questions les plus courantes sur le projet.</p>
+          <p style={{ color: '#3A4A6A', marginBottom: 32, maxWidth: 700 }}>Retrouvez les réponses aux questions les plus courantes sur le projet.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 28 }}>
             {faqCategories.map(cat => (
               <button key={cat} onClick={() => setFaqCat(cat)} style={{ ...chip(), background: faqCat === cat ? '#0D1F4A' : '#F5F2EA', color: faqCat === cat ? 'white' : '#3A4A6A', border: `1.5px solid ${faqCat === cat ? '#0D1F4A' : 'transparent'}` }}>
@@ -365,7 +365,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow">Actualités</span>
           <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Suivez l'avancement du projet</h2>
-          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 560 }}>Restez informé des dernières nouvelles et des étapes importantes du projet.</p>
+          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 700 }}>Restez informé des dernières nouvelles et des étapes importantes du projet.</p>
           {p.news.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '48px 0', color: '#6B7894' }}>
               <div style={{ marginBottom: 12, color: '#6B7894', display: 'flex', justifyContent: 'center' }}><Icon name="news" size={40} strokeWidth={1.3} /></div>
