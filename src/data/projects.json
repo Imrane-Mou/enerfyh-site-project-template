@@ -8,9 +8,12 @@
     "region": "Hauts-de-France",
     "capacity": "36 MW / 128 MWh",
     "thumbnail": "",
+    "heroImage": "/images/avesnes-le-comte.jpg",
+    "sitePlan": "",
+    "galleryPhotos": [],
     "project": {
       "name": "Centrale de stockage d'énergie par batteries d'Avesnes-le-Comte",
-      "subtitle": "36 MW / 128 MWh de capacité de stockage pour la Communauté de Communes des Campagnes de l'Artois",
+      "subtitle": "36 MW / 128 MWh de capacité de stockage à Avesnes-le-Comte",
       "description": "EnerFYH développe sur la commune d'Avesnes-le-Comte une centrale de stockage d'énergie par batteries (BESS — Battery Energy Storage System), située au 950 rue de Frévent, en zone UE du PLUi Campagnes de l'Artois (approuvé en mars 2022)."
     },
     "keyFigures": [
@@ -70,7 +73,7 @@
     "location": {
       "address": "950 rue de Frévent, 62810 Avesnes-le-Comte",
       "commune": "Avesnes-le-Comte",
-      "department": "Pas-de-Calais",
+      "department": "Pas-de-Calais (62810)",
       "gpsLat": 50.3011,
       "gpsLng": 2.4853,
       "gpsLabel": "50°18'N 2°29'E",
@@ -177,9 +180,6 @@
         "label": "Flyer d'information du projet",
         "url": "#"
       }
-    ],
-    "heroImage": "/images/avesnes-le-comte.jpg",
-    "galleryPhotos": [],
-    "sitePlan": ""
+    ]
   }
 ]
