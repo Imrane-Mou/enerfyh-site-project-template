@@ -234,10 +234,10 @@ export default function HomePage() {
           <p style={{ color: '#3A4A6A', maxWidth: 480, margin: '0 auto 36px', fontSize: '1rem', lineHeight: 1.7 }}>
             Notre équipe est disponible pour répondre à toutes vos questions sur nos projets de stockage d'énergie.
           </p>
-          <a href="mailto:contact@enerfyh.com" style={{ background: '#0D1F4A', color: 'white', padding: '15px 36px', borderRadius: 6, fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', display: 'inline-block', transition: 'background 0.2s' }}
+          <a href="mailto:youssef.mabrouk@enerfyh.com" style={{ background: '#0D1F4A', color: 'white', padding: '15px 36px', borderRadius: 6, fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', display: 'inline-block', transition: 'background 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.background = '#1A3A7A'}
             onMouseLeave={e => e.currentTarget.style.background = '#0D1F4A'}>
-            contact@enerfyh.com →
+            youssef.mabrouk@enerfyh.com →
           </a>
         </div>
       </section>

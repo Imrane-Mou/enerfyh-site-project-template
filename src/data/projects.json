@@ -74,18 +74,18 @@
     },
     "localBenefits": {
       "taxe1": {
-        "label": "Taxe Foncière sur les Propriétés Bâties (TFPB)",
-        "amount": "Recettes stables",
+        "label": "Recettes stables",
+        "amount": "Taxe Foncière sur les Propriétés Bâties (TFPB)",
         "detail": "Versée à la commune pendant toute la durée d'exploitation."
       },
       "taxe2": {
-        "label": "Cotisation Foncière des Entreprises (CFE)",
-        "amount": "Recettes stables",
+        "label": "Recettes stables",
+        "amount": "",
         "detail": "Bénéficie à l'intercommunalité durant toute l'exploitation."
       },
       "taxe3": {
-        "label": "Taxe d'aménagement",
-        "amount": "Versement unique",
+        "label": "Versement unique",
+        "amount": "Taxe d'aménagement",
         "detail": "Versée à la construction du projet."
       },
       "emplois": "Mobilisation d'entreprises et de main-d'œuvre locales pour la construction",
