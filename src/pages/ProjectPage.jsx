@@ -215,7 +215,7 @@ export default function ProjectPage() {
         <div className="container">
           <span className="eyebrow">Environnement</span>
           <h2 style={{ color: '#0D1F4A', marginBottom: 12 }}>Maîtrise des impacts environnementaux</h2>
-          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 560 }}>Le projet a été optimisé pour s'insérer discrètement dans son environnement.</p>
+          <p style={{ color: '#3A4A6A', marginBottom: 48, maxWidth: 580 }}>Le projet a été optimisé pour s'insérer discrètement dans son environnement.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: 20 }}>
             {p.environment.map((item, i) => (
               <div key={i} style={{ background: '#F5F2EA', borderRadius: 12, padding: '32px 28px', border: '1px solid rgba(13,31,74,0.07)', transition: 'transform 0.2s, box-shadow 0.2s' }}
