@@ -43,7 +43,7 @@ export default function HomePage() {
           {/* Badge */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 24, padding: '6px 16px', marginBottom: 28 }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ADE80', display: 'inline-block', boxShadow: '0 0 8px #4ADE80' }} />
-            <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.1em' }}>EnerFYH · kyntus group</span>
+            <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.1em' }}>EnerFYH · GROUPE KYNTUS</span>
           </div>
 
           <h1 style={{ color: 'white', maxWidth: 700, marginBottom: 20, lineHeight: 1.08, letterSpacing: '-0.02em' }}>
@@ -69,7 +69,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── KYNTUS GROUP ── */}
+      {/* ── GROUPE KYNTUS ── */}
       <section style={{ padding: '64px 0', background: '#F5F2EA' }}>
         <div className="container">
           <div style={{ background: '#0D1F4A', borderRadius: 14, padding: '36px 40px', display: 'flex', gap: 32, alignItems: 'flex-start', flexWrap: 'wrap' }}>
@@ -248,11 +248,11 @@ export default function HomePage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ background: 'white', borderRadius: 5, padding: '5px 10px' }}>
               <div style={{ color: '#0D1F4A', fontWeight: 800, fontSize: '0.95rem', lineHeight: 1.1 }}>EnerFYH.</div>
-              <div style={{ color: '#0D1F4A', fontSize: '0.45rem', opacity: 0.55, letterSpacing: '0.06em' }}>∧ kyntus group</div>
+              <div style={{ color: '#0D1F4A', fontSize: '0.45rem', opacity: 0.55, letterSpacing: '0.06em' }}>∧ GROUPE KYNTUS</div>
             </div>
           </div>
           <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
-            © {new Date().getFullYear()} EnerFYH · kyntus group · Tous droits réservés
+            © {new Date().getFullYear()} EnerFYH · GROUPE KYNTUS · Tous droits réservés
           </div>
           <div style={{ display: 'flex', gap: 20 }}>
             {['Mentions légales', 'Confidentialité'].map(l => (
