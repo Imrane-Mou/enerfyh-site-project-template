@@ -39,7 +39,7 @@
       },
       {
         "label": "RACCORDEMENT",
-        "value": "Réseau RTE",
+        "value": "Réseau ENEDIS",
         "detail": "Raccordement au réseau électrique national"
       },
       {
@@ -50,24 +50,16 @@
     ],
     "timeline": [
       {
-        "date": "2022",
-        "event": "Approbation du PLUi Campagnes de l'Artois incluant la zone UE du projet"
-      },
-      {
-        "date": "2023",
-        "event": "Études techniques et environnementales préliminaires"
-      },
-      {
-        "date": "2024",
-        "event": "Dépôt de la demande de permis de construire"
-      },
-      {
         "date": "2025",
+        "event": "Sécurisation foncière"
+      },
+      {
+        "date": "2026",
         "event": "Obtention du permis de construire"
       },
       {
         "date": "À venir",
-        "event": "Travaux de construction et raccordement au réseau RTE"
+        "event": "Travaux de construction et raccordement au réseau Enedis"
       }
     ],
     "location": {
