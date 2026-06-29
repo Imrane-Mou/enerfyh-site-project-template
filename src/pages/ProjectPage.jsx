@@ -114,38 +114,7 @@ export default function ProjectPage() {
         </div>
       </section>
       
-      {/* ── KYNTUS GROUP ── */}
-      <section style={{ padding: '64px 0', background: '#F5F2EA' }}>
-        <div className="container">
-          <div style={{ background: '#0D1F4A', borderRadius: 14, padding: '36px 40px', display: 'flex', gap: 32, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-            <div style={{ flex: '1 1 320px' }}>
-              <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7ECC52', marginBottom: 8 }}>
-                EnerFYH est une filiale de
-              </div>
-              <div style={{ color: 'white', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '0.02em', marginBottom: 14 }}>
-                KYNTUS GROUP
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem', lineHeight: 1.7 }}>
-                Fondé en 2018, Kyntus est un grand groupe français actif dans la construction et la maintenance de réseaux de télécommunications fixes et mobiles (fibre optique, 4G, 5G). Présent en France, en Allemagne, en Irlande et à La Réunion, le groupe apporte à EnerFYH <strong style={{ color: 'rgba(255,255,255,0.9)' }}>un soutien industriel solide, un financement robuste et une excellence opérationnelle</strong> éprouvée sur des déploiements d'infrastructures à grande échelle.
-              </p>
-            </div>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', borderLeft: '1px solid rgba(255,255,255,0.12)', paddingLeft: 28 }}>
-              {[
-                { num: '273M€', label: "Chiffre d'affaires 2024" },
-                { num: '+26%', label: 'Croissance annuelle' },
-                { num: '3 000', label: 'Collaborateurs (partenaires inclus)' },
-              ].map((s, i) => (
-                <div key={i} style={{ textAlign: 'center', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '12px 16px', minWidth: 100 }}>
-                  <div style={{ color: '#7ECC52', fontWeight: 800, fontSize: '1.3rem', lineHeight: 1 }}>{s.num}</div>
-                  <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.7rem', marginTop: 4, lineHeight: 1.3 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <style>{`@media(max-width:700px){section div[style*="border-left: 1px solid rgba(255,255,255,0.12)"]{border-left:none!important;padding-left:0!important}}`}</style>
-      </section>
-
+    
       {/* ── KEY FIGURES + TIMELINE ── */}
       <section id="projet" style={{ padding: '88px 0', background: '#F5F2EA' }}>
         <div className="container">
