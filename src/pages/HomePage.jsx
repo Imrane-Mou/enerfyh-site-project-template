@@ -50,7 +50,7 @@ export default function HomePage() {
             Nos projets de<br />stockage d'énergie
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', maxWidth: 560, lineHeight: 1.75, marginBottom: 52 }}>
-            EnerFYH développe des centrales de stockage d'électricité par batteries (BESS Standalone) sur le territoire français, avec des puissances allant jusqu'à 100 MW.
+            EnerFYH développe des centrales de stockage d'électricité par batteries (BESS Standalone) sur le territoire français, avec des puissances allant jusqu'à 12 MW.
           </p>
 
           {/* Stats row */}
@@ -75,10 +75,10 @@ export default function HomePage() {
           <div style={{ background: '#0D1F4A', borderRadius: 14, padding: '36px 40px', display: 'flex', gap: 32, alignItems: 'flex-start', flexWrap: 'wrap' }}>
             <div style={{ flex: '1 1 320px' }}>
               <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7ECC52', marginBottom: 8 }}>
-                EnerFYH est une filiale de
+                EnerFYH est une filiale du
               </div>
               <div style={{ color: 'white', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '0.02em', marginBottom: 14 }}>
-                KYNTUS GROUP
+                GROUPE KYNTUS
               </div>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem', lineHeight: 1.7 }}>
                 Fondé en 2018, Kyntus est un grand groupe français actif dans la construction et la maintenance de réseaux de télécommunications fixes et mobiles (fibre optique, 4G, 5G). Présent en France, en Allemagne, en Irlande et à La Réunion, le groupe apporte à EnerFYH <strong style={{ color: 'rgba(255,255,255,0.9)' }}>un soutien industriel solide, un financement robuste et une excellence opérationnelle</strong> éprouvée sur des déploiements d'infrastructures à grande échelle.
