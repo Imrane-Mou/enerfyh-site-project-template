@@ -25,9 +25,6 @@ export default function LegalPage() {
       <section style={{ padding: '64px 0 96px', background: '#F5F2EA' }}>
         <div className="container" style={{ maxWidth: 760 }}>
 
-          <div style={{ background: '#FEF3C7', border: '1px solid #F2C744', borderRadius: 10, padding: '16px 20px', marginBottom: 48, fontSize: '0.85rem', color: '#92400E', lineHeight: 1.6 }}>
-            Page provisoire avec des données d'exemple — à remplacer par les véritables informations légales d'EnerFYH avant la mise en ligne publique.
-          </div>
 
           <div style={section}>
             <h2 style={h2}>Éditeur du site</h2>
