@@ -136,7 +136,7 @@ export default function ProjectPage() {
             {p.timeline.map((item, i) => (
               <div key={i} style={{ flex: '1 1 0', minWidth: 190, position: 'relative', padding: '0 16px' }}>
                 {/* line + tick */}
-                <div style={{ position: 'relative', height: 2, background: i === 0 ? 'transparent' : 'rgba(13,31,74,0.15)', marginBottom: 16 }}>
+                <div style={{ position: 'relative', height: 2, background: 'rgba(13,31,74,0.15)', marginBottom: 16 }}>
                   <div style={{ position: 'absolute', left: 0, top: -3, width: 8, height: 8, borderRadius: '50%', background: '#0D1F4A' }} />
                 </div>
                 <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0D1F4A', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>{item.date}</div>
