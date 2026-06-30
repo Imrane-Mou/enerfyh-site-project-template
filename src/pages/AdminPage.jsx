@@ -458,9 +458,9 @@ export default function AdminPage() {
         <div style={sectionCard}>
           <div style={sectionTitle}><Icon name="wheat" size={18} color="#0D1F4A" /> Retombées locales</div>
           <div style={sectionDesc}>Fiscalité, emploi et impact agricole.</div>
-          {['taxe1', 'taxe2', 'taxe3'].map((t, i) => (
+          {['taxe1', 'taxe2', 'taxe3'].map((t) => (
             <div key={t} style={itemBox}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7894', display: 'block', marginBottom: 12 }}>{form[t].label}</span>
+              <Field label="Titre de la taxe" value={form[t].label} onChange={v => setNested(t, 'label', v)} placeholder="Taxe Foncière sur les Propriétés Bâties (TFPB)" />
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 <Field label="Montant" value={form[t].amount} onChange={v => setNested(t, 'amount', v)} placeholder="20 000 – 30 000 €/an" />
                 <Field label="Détail" value={form[t].detail} onChange={v => setNested(t, 'detail', v)} placeholder="Versée à la commune." />
