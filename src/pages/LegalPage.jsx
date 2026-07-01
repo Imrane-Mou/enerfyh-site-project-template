@@ -40,7 +40,7 @@ export default function LegalPage() {
               Immatriculation au RNE (INPI) : 12 juillet 2025
             </p>
             <p style={p}>
-              Contact : <a href="mailto:contact@enerfyh.com" style={{ color: '#0D1F4A', fontWeight: 600 }}>contact@enerfyh.com</a>
+              Contact : <a href="mailto:youssef.mabrouk@enerfyh.com" style={{ color: '#0D1F4A', fontWeight: 600 }}>youssef.mabrouk@enerfyh.com</a>
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export default function LegalPage() {
               Les informations recueillies via le formulaire de contact du site sont destinées exclusivement à ENERFYH, dans le cadre du traitement des demandes des utilisateurs. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant.
             </p>
             <p style={p}>
-              Pour exercer ce droit, contactez : <a href="mailto:contact@enerfyh.com" style={{ color: '#0D1F4A', fontWeight: 600 }}>contact@enerfyh.com</a>
+              Pour exercer ce droit, contactez : <a href="mailto:youssef.mabrouk@enerfyh.com" style={{ color: '#0D1F4A', fontWeight: 600 }}>youssef.mabrouk@enerfyh.com</a>
             </p>
           </div>
 
